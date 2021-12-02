@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, ParamMap } from "@angular/router";
-import { map, Observable, switchMap } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map, Observable, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { formatRating } from '@bg-board/store/util-formatters';
-import { Game } from "@bg-board/api/util-interface";
+import { Game } from '@bg-board/util-interface';
 
 @Component({
   selector: 'bg-board-game-detail',
@@ -21,14 +21,14 @@ import { Game } from "@bg-board/api/util-interface";
         <div class="details">
           <p>{{ game.description }}</p>
           <div class="sell-info">
-        <span
-        ><span style="font-weight: bold">Price:</span>
-          {{ game.price | currency: 'USD' }}</span
-        >
+            <span
+              ><span style="font-weight: bold">Price:</span>
+              {{ game.price | currency: 'USD' }}</span
+            >
             <span>
-          <span style="font-weight: bold">Rating:</span>
+              <span style="font-weight: bold">Rating:</span>
               {{ formatRating(game.rating) }}
-        </span>
+            </span>
           </div>
           <div>
             <button mat-raised-button class="buy-button">BUY</button>
@@ -39,17 +39,14 @@ import { Game } from "@bg-board/api/util-interface";
     </mat-card>
   `,
   styleUrls: ['./game-detail.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class GameDetailComponent {
-  constructor(
-    private route: ActivatedRoute,
-    private http: HttpClient
-  ) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   game$: Observable<Game> = this.route.paramMap.pipe(
     map((params: ParamMap) => params.get('id')),
-    switchMap(id => this.http.get<Game>(`/api/games/${id}`))
+    switchMap((id) => this.http.get<Game>(`/api/games/${id}`))
   );
 
   formatRating = formatRating;

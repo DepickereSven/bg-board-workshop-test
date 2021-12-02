@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 import { getAllGames } from '../fake-api';
 import { formatRating } from '@bg-board/store/util-formatters';
-import { HttpClient } from "@angular/common/http";
-import { Game } from "@bg-board/api/util-interface";
+import { HttpClient } from '@angular/common/http';
+import { Game } from '@bg-board/util-interface';
 
 @Component({
   selector: 'bg-board-root',
   styleUrls: ['./app.component.scss'],
   template: `
-    <bg-board-header
-      [title]="title"
-    ></bg-board-header>
+    <bg-board-header [title]="title"></bg-board-header>
     <div class="container">
       <div class="games-layout">
-        <mat-card class="game-card" *ngFor="let game of games$ | async" [routerLink]="['/game', game.id]">
+        <mat-card
+          class="game-card"
+          *ngFor="let game of games$ | async"
+          [routerLink]="['/game', game.id]"
+        >
           <mat-card-header class="center-content">
             <mat-card-title>{{ game.name }}</mat-card-title>
           </mat-card-header>
@@ -27,14 +29,15 @@ import { Game } from "@bg-board/api/util-interface";
               {{ game.description }}
             </p>
             <span>
-          <span style="font-weight: bold;">Rating:</span> {{ formatRating(game.rating) }}
-        </span>
+              <span style="font-weight: bold;">Rating:</span>
+              {{ formatRating(game.rating) }}
+            </span>
           </mat-card-content>
         </mat-card>
       </div>
       <router-outlet></router-outlet>
     </div>
-  `
+  `,
 })
 export class AppComponent {
   constructor(private http: HttpClient) {}

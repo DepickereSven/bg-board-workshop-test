@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Game } from "@bg-board/api/util-interface";
+import { Game } from '@bg-board/util-interface';
 
 @Controller('games')
 export class AppController {
