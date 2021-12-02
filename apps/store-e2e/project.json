@@ -23,6 +23,8 @@
       }
     }
   },
-  "tags": [],
-  "implicitDependencies": ["store"]
+  "tags": ["scope:store", "type:e2e"],
+  "implicitDependencies": [
+    "store"
+  ]
 }

@@ -23,6 +23,8 @@
       }
     }
   },
-  "tags": [],
-  "implicitDependencies": ["store-ui-shared"]
+  "tags": ["scope:store", "type:e2e"],
+  "implicitDependencies": [
+    "store-ui-shared"
+  ]
 }
