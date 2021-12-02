@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@bg-board/store/ui-shared": ["libs/store/ui-shared/src/index.ts"]
+      "@bg-board/store/ui-shared": ["libs/store/ui-shared/src/index.ts"],
+      "@bg-board/store/util-formatters": [
+        "libs/store/util-formatters/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
