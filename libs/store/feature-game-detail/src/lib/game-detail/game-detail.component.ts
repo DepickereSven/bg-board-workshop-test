@@ -1,8 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, ParamMap } from "@angular/router";
-import { map, switchMap } from "rxjs";
+import { map, Observable, switchMap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { formatRating } from '@bg-board/store/util-formatters';
+import { Game } from "@bg-board/api/util-interface";
 
 @Component({
   selector: 'bg-board-game-detail',
@@ -46,9 +47,9 @@ export class GameDetailComponent {
     private http: HttpClient
   ) {}
 
-  game$ = this.route.paramMap.pipe(
+  game$: Observable<Game> = this.route.paramMap.pipe(
     map((params: ParamMap) => params.get('id')),
-    switchMap(id => this.http.get<any>(`/api/games/${id}`))
+    switchMap(id => this.http.get<Game>(`/api/games/${id}`))
   );
 
   formatRating = formatRating;

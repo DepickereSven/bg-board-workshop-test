@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { getAllGames } from '../fake-api';
 import { formatRating } from '@bg-board/store/util-formatters';
 import { HttpClient } from "@angular/common/http";
+import { Game } from "@bg-board/api/util-interface";
 
 @Component({
   selector: 'bg-board-root',
@@ -40,5 +41,5 @@ export class AppComponent {
 
   title = 'Board Game Hoard';
   formatRating = formatRating;
-  games$ = this.http.get<any[]>('/api/games');
+  games$ = this.http.get<Game[]>('/api/games');
 }
