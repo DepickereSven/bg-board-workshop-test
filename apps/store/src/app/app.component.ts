@@ -11,7 +11,7 @@ import { formatRating } from '@bg-board/store/util-formatters';
     ></bg-board-header>
     <div class="container">
       <div class="games-layout">
-        <mat-card class="game-card" *ngFor="let game of games">
+        <mat-card class="game-card" *ngFor="let game of games" [routerLink]="['/game', game.id]">
           <mat-card-header class="center-content">
             <mat-card-title>{{ game.name }}</mat-card-title>
           </mat-card-header>
@@ -30,6 +30,7 @@ import { formatRating } from '@bg-board/store/util-formatters';
           </mat-card-content>
         </mat-card>
       </div>
+      <router-outlet></router-outlet>
     </div>
   `
 })

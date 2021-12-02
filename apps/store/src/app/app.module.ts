@@ -14,7 +14,7 @@ import { StoreUiSharedModule } from '@bg-board/store/ui-shared';
     RouterModule.forRoot(
       [
         {
-          path: 'store-feature-game-detail',
+          path: 'game/:id',
           loadChildren: () =>
             import('@bg-board/store/feature-game-detail').then(
               (module) => module.StoreFeatureGameDetailModule
