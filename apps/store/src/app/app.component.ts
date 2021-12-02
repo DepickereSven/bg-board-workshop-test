@@ -1,12 +1,41 @@
 import { Component } from '@angular/core';
 import { getAllGames } from '../fake-api';
+import { formatRating } from '@bg-board/store/util-formatters';
 
 @Component({
   selector: 'bg-board-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  template: `
+    <bg-board-header
+      [title]="title"
+    ></bg-board-header>
+    <div class="container">
+      <div class="games-layout">
+        <mat-card class="game-card" *ngFor="let game of games">
+          <mat-card-header class="center-content">
+            <mat-card-title>{{ game.name }}</mat-card-title>
+          </mat-card-header>
+          <img
+            mat-card-image
+            src="{{ game.image }}"
+            alt="Photo of board game {{ game.name }}"
+          />
+          <mat-card-content>
+            <p>
+              {{ game.description }}
+            </p>
+            <span>
+          <span style="font-weight: bold;">Rating:</span> {{ formatRating(game.rating) }}
+        </span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  `
 })
 export class AppComponent {
   title = 'Board Game Hoard';
   games = getAllGames();
+
+  formatRating = formatRating;
 }
