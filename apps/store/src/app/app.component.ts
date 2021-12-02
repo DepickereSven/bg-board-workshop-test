@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { getAllGames } from '../fake-api';
 import { formatRating } from '@bg-board/store/util-formatters';
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'bg-board-root',
@@ -11,7 +12,7 @@ import { formatRating } from '@bg-board/store/util-formatters';
     ></bg-board-header>
     <div class="container">
       <div class="games-layout">
-        <mat-card class="game-card" *ngFor="let game of games" [routerLink]="['/game', game.id]">
+        <mat-card class="game-card" *ngFor="let game of games$ | async" [routerLink]="['/game', game.id]">
           <mat-card-header class="center-content">
             <mat-card-title>{{ game.name }}</mat-card-title>
           </mat-card-header>
@@ -35,8 +36,9 @@ import { formatRating } from '@bg-board/store/util-formatters';
   `
 })
 export class AppComponent {
-  title = 'Board Game Hoard';
-  games = getAllGames();
+  constructor(private http: HttpClient) {}
 
+  title = 'Board Game Hoard';
   formatRating = formatRating;
+  games$ = this.http.get<any[]>('/api/games');
 }
